@@ -1,6 +1,6 @@
 # **U-Turn**
 
-<p align="center"> <img src="Assets/Art/ReadMe UI/readme_img.png" alt="Game Icon" width="256"> </p>
+<p align="center"> <img src="Assets/Art/ReadMe UI/readme_img.png" alt="Game Instructions"> </p>
 
 自動で加速する車を操作し、スペースキーだけでスピードを調整しながら難しいカーブを走り抜ける3Dレースゲーム。
 手描き風のスタイルと物理ベースの動きを特徴としています。
