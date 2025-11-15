@@ -3,7 +3,7 @@ using UnityEngine;
 public class LapManager : MonoBehaviour
 {
     [SerializeField] int totalLaps = 15;
-    [SerializeField] string lapTriggerTag = "LapTrigger";       // apply it on the vehicle
+    [SerializeField] string lapTriggerTag = "LapTrigger";       // Apply it on the vehicle
     [SerializeField] ParticleSystem[] lapVFXs;
 
     private int _lapsCompleted = 0;

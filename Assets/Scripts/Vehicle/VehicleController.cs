@@ -27,6 +27,7 @@ public class VehicleController : AManagedBehaviour, IFixedUpdatable, ILateUpdata
     private bool controlEnabled = true;
     private float currentSpeed = 0f;
     private CinemachineImpulseSource cineImpulseSouce;
+    private UIManager uiManager;
     // private AudioManager audioManager;
 
     void Awake()
@@ -37,6 +38,7 @@ public class VehicleController : AManagedBehaviour, IFixedUpdatable, ILateUpdata
     void Start()
     {
         // audioManager = AudioManager.Instance;
+        uiManager = UIManager.Instance;
         rb = GetComponent<Rigidbody>();
         cineImpulseSouce = GetComponent<CinemachineImpulseSource>();
         rb.interpolation = RigidbodyInterpolation.Interpolate;
@@ -75,7 +77,7 @@ public class VehicleController : AManagedBehaviour, IFixedUpdatable, ILateUpdata
 
     public void ManagedLateUpdate()
     {
-        UIManager.Instance.SetSpeedText(Mathf.RoundToInt(currentSpeed));
+        uiManager.SetSpeedText(Mathf.RoundToInt(currentSpeed));
     }
 
     void CalculateNearestPoint()
@@ -166,7 +168,7 @@ public class VehicleController : AManagedBehaviour, IFixedUpdatable, ILateUpdata
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Environment"))
+        if (other.gameObject.layer == LayerMask.NameToLayer(LAYERS.ENVIRONMENT))
             cineImpulseSouce.GenerateImpulse();
     }
 

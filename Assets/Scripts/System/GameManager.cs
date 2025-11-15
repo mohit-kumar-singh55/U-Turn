@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     private bool gameEnded = false;
     private bool menuActive = false;
 
-    private KeyCode cheatKeyNextLevel = KeyCode.L;
+    private readonly KeyCode cheatKeyNextLevel = KeyCode.L;
 
     private void Awake()
     {

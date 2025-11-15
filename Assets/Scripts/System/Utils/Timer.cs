@@ -33,10 +33,10 @@ public class Timer : AManagedBehaviour, IUpdatable
 
     public void ManagedUpdate()
     {
-        // stop time if won
+        // 勝ったらタイマーを止める
         if (stopTimer) return;
 
-        // if timer runs out, game over
+        // タイマーが0になったらゲームオーバー
         if (_timeLeft == 0)
         {
             GameManager.Instance.TriggerLose();

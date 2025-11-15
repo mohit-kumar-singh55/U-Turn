@@ -6,7 +6,7 @@ public class InstructionsUI : MonoBehaviour
 
     void Awake()
     {
-        // will show instruction only the first time player launches the game
+        // プレイヤーがゲームを初めて起動するときだけ指示uiを表示
         if (!CheckIfFirstTime())
         {
             gameObject.SetActive(false);
