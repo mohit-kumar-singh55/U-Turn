@@ -10,7 +10,7 @@ jobs:
       fail-fast: false
       matrix:
         projectPath:
-          - build/WebGL
+          - U-Turn
         unityVersion:
           - 6000.0.32f1
         targetPlatform:
@@ -72,7 +72,7 @@ jobs:
       fail-fast: false
       matrix:
         projectPath:
-          - build/WebGL
+          - U-Turn
         unityVersion:
           - 6000.0.32f1
         targetPlatform:
@@ -118,7 +118,7 @@ jobs:
   #     fail-fast: false
   #     matrix:
   #       projectPath:
-  #         - build/WebGL
+  #         - U-Turn
   #       unityVersion:
   #         - 6000.0.32f1
   #       targetPlatform:
