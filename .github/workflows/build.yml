@@ -1,27 +1,33 @@
 name: Build And Deploy WebGL
 
-on: [push, pull_request]
+on:
+  workflow_dispatch:  #手動でワークフローを始められる
+  push:               #リポジトリにプッシュしたとき
+  pull_request:
+    types: ["closed"] #プルリクエストがクローズされたとき
+    branches:
+      - main           #対象ブランチ
 
 jobs:
-  free-disk-space:
-    runs-on: ubuntu-latest
-    steps:
+  # free-disk-space:
+  #   runs-on: ubuntu-latest
+  #   steps:
 
-    - name: Free Disk Space (Ubuntu)
-      uses: jlumbroso/free-disk-space@main
-      with:
-        # this might remove tools that are actually needed,
-        # if set to "true" but frees about 6 GB
-        tool-cache: false
+  #   - name: Free Disk Space (Ubuntu)
+  #     uses: jlumbroso/free-disk-space@main
+  #     with:
+  #       # this might remove tools that are actually needed,
+  #       # if set to "true" but frees about 6 GB
+  #       tool-cache: false
         
-        # all of these default to true, but feel free to set to
-        # "false" if necessary for your workflow
-        android: true
-        dotnet: true
-        haskell: true
-        large-packages: true
-        docker-images: true
-        swap-storage: true
+  #       # all of these default to true, but feel free to set to
+  #       # "false" if necessary for your workflow
+  #       android: true
+  #       dotnet: true
+  #       haskell: true
+  #       large-packages: true
+  #       docker-images: true
+  #       swap-storage: true
         
   buildAndTestForLinuxBasedPlatforms:
     name: Build for ${{ matrix.targetPlatform }}
@@ -39,37 +45,33 @@ jobs:
           # - Android # Build an Android player.
           - WebGL # WebGL.
     steps:
+      ###########################
+      #    Free disk space   #
+      ###########################
+      - name: Free disk space
+        run: .github/workflows/scripts/free_disk_space.sh
+
       - uses: actions/checkout@v6.0.0
         with:
           fetch-depth: 0
           lfs: true
+
       - uses: actions/cache@v4.3.0
         with:
-          path: ${{ matrix.projectPath }}/Library
-          key:
-            Library-${{ matrix.projectPath }}-${{ matrix.targetPlatform }}-${{
-            hashFiles(matrix.projectPath) }}
-          restore-keys: |
-            Library-${{ matrix.projectPath }}-${{ matrix.targetPlatform }}-
-            Library-${{ matrix.projectPath }}-
-            Library-
-      # - uses: game-ci/unity-test-runner@v4
-      #   id: testRunner
-      #   env:
-      #     UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-      #     UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-      #     UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
-      #   with:
-      #     projectPath: ${{ matrix.projectPath }}
-      #     unityVersion: ${{ matrix.unityVersion }}
-      #     githubToken: ${{ secrets.GITHUB_TOKEN }}
-      # - uses: actions/upload-artifact@v4
-      #   if: always()
-      #   with:
-      #     name: Test results (all modes)
-      #     path: ${{ steps.testRunner.outputs.artifactsPath }}
-      # - if: matrix.targetPlatform == 'Android'
-      #   uses: jlumbroso/free-disk-space@v1.2.0
+          # path: ${{ matrix.projectPath }}/Library
+          # key:
+          #   Library-${{ matrix.projectPath }}-${{ matrix.targetPlatform }}-${{ hashFiles(matrix.projectPath) }}
+          # restore-keys: |
+          #   Library-${{ matrix.projectPath }}-${{ matrix.targetPlatform }}-
+          #   Library-${{ matrix.projectPath }}-
+          #   Library-
+          path: Library
+          key: Library-${{ hashFiles('Assets/**','Packages/**','ProjectSettings/**') }}
+          restore-keys: Library-
+
+      - if: matrix.targetPlatform == 'Android'
+        uses: jlumbroso/free-disk-space@v1.3.1
+
       - uses: game-ci/unity-builder@v4.8.1
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
@@ -80,6 +82,7 @@ jobs:
           unityVersion: ${{ matrix.unityVersion }}
           targetPlatform: ${{ matrix.targetPlatform }}
           # customParameters: '-myParameter myValue -myBoolean -ThirdParameter andItsValue'
+
       - uses: actions/upload-artifact@v4
         with:
           name: WebGL-Build
