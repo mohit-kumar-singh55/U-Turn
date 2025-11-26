@@ -10,7 +10,7 @@ jobs:
       fail-fast: false
       matrix:
         projectPath:
-          - U-Turn
+          - .
         unityVersion:
           - 6000.0.32f1
         targetPlatform:
@@ -72,13 +72,13 @@ jobs:
       fail-fast: false
       matrix:
         projectPath:
-          - U-Turn
+          - .
         unityVersion:
           - 6000.0.32f1
         targetPlatform:
-          - StandaloneWindows # Build a Windows 32-bit standalone.
-          - StandaloneWindows64 # Build a Windows 64-bit standalone.
-          - tvOS # Build an AppleTV player.
+          # - StandaloneWindows # Build a Windows 32-bit standalone.
+          # - StandaloneWindows64 # Build a Windows 64-bit standalone.
+          # - tvOS # Build an AppleTV player.
           - WSAPlayer # Build a UWP App.
 
     steps:
@@ -118,7 +118,7 @@ jobs:
   #     fail-fast: false
   #     matrix:
   #       projectPath:
-  #         - U-Turn
+  #         - .
   #       unityVersion:
   #         - 6000.0.32f1
   #       targetPlatform:
