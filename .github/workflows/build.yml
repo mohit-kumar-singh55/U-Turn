@@ -45,12 +45,6 @@ jobs:
           # - Android # Build an Android player.
           - WebGL # WebGL.
     steps:
-      ###########################
-      #    Free disk space   #
-      ###########################
-      - name: Free disk space
-        run: .github/workflows/scripts/free_disk_space.sh
-
       - uses: actions/checkout@v6.0.0
         with:
           fetch-depth: 0
