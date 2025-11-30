@@ -143,16 +143,19 @@ public class VehicleController : AManagedBehaviour, IFixedUpdatable, ILateUpdata
 
     float GetTurnAngle(float tPos)
     {
-        float checkDist = 1f;
-        float tAhead = Mathf.Clamp01(tPos + checkDist / splineLength);
-        float tBehind = Mathf.Clamp01(tPos - checkDist / splineLength);
+        float checkDist = 1f;   // Distance to check ahead/behind on the spline
+        float tAhead = Mathf.Clamp01(tPos + checkDist / splineLength);  // a bit ahead on the spline
+        float tBehind = Mathf.Clamp01(tPos - checkDist / splineLength); // a bit behind on the spline
 
+        // World positions on the spline
         Vector3 aheadPos = spline.EvaluatePosition(tAhead);
         Vector3 behindPos = spline.EvaluatePosition(tBehind);
 
+        // Direction vectors relative to the car's current position
         Vector3 forwardAhead = (aheadPos - transform.position).normalized;
         Vector3 forwardBehind = (transform.position - behindPos).normalized;
 
+        // Angle between these directions represents the turn's sharpness
         return Vector3.Angle(forwardBehind, forwardAhead);
     }
 
