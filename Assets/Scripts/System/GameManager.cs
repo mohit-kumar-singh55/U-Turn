@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOverSequence()
     {
-        ShowCursor(true);
+        // ShowCursor(true);
         Timer.Instance.StopTimer(true);
         // AudioManager.Instance.StopAllAudios(true);
         uiManager.ShowGameOverPanelUI(true);
