@@ -99,9 +99,9 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         Time.fixedDeltaTime = 0.02f;
 
-        // 0 -> intro scene, 1 -> main menu, 2 -> levels...
+        // 0 -> intro scene, 1 -> main menu, 2 -> instructions, 3 -> levels...
         int nextLevelInd = (SceneManager.GetActiveScene().buildIndex + 1) % SceneManager.sceneCountInBuildSettings;
-        nextLevelInd = nextLevelInd <= 1 ? 2 : nextLevelInd;
+        nextLevelInd = nextLevelInd <= 2 ? 3 : nextLevelInd;
         SceneManager.LoadScene(nextLevelInd);
     }
 

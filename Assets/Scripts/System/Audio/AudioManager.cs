@@ -53,6 +53,7 @@ public class AudioManager : MonoBehaviour
         vehicleAudioSource.Play();
     }
 
+    // 時間経過でボリュームをフェードさせる
     IEnumerator FadeVolume(AudioSource source, float startVolume, float endVolume, float time, bool stopPlaying = false)
     {
         float t = 0f;
@@ -66,6 +67,7 @@ public class AudioManager : MonoBehaviour
         if (stopPlaying) source.Stop();
     }
 
+    // 時間経過でピッチをフェードさせる
     IEnumerator FadePitch(AudioSource source, float startPitch, float endPitch, float time)
     {
         float t = 0f;
