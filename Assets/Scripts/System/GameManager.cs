@@ -1,7 +1,9 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-// Singleton Class
+/// <summary>
+/// ゲームオーバー演出、UI表示、メニューの切り替え、チート機能などを含むゲーム状態全体を管理するクラス
+/// </summary>
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
@@ -34,7 +36,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        // cheat to go to next level
+        // 次のレベルへ移動するチート
         if (Input.GetKeyDown(cheatKeyNextLevel)) GoToNextLevel();
     }
 
@@ -45,7 +47,7 @@ public class GameManager : MonoBehaviour
         menuActive = !menuActive;
         // uiManager.ShowMenuUI(menuActive);
         Time.timeScale = menuActive ? 0 : 1;
-        ShowCursor(menuActive);
+        // ShowCursor(menuActive);
     }
 
     public void TriggerLose()
@@ -105,5 +107,12 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(nextLevelInd);
     }
 
-    public void QuitGame() => Application.Quit();
+    public void QuitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
+    }
 }

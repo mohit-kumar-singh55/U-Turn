@@ -32,6 +32,10 @@ public class MainMenuController : MonoBehaviour
         }
 
         PlayBGM();
+
+        // カーソルを非表示にする
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void LateUpdate()
@@ -44,7 +48,14 @@ public class MainMenuController : MonoBehaviour
         FadeOutScreen();
     }
 
-    public void Quit() => Application.Quit();
+    public void Quit()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
+    }
 
     void FadeOutScreen()
     {

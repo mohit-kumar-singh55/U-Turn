@@ -19,7 +19,7 @@ public class LapManager : MonoBehaviour
         {
             _lapsCompleted++;
             UIManager.Instance.SetLapsText(_lapsCompleted, totalLaps);
-            if (lapVFXs.Length > 0) lapVFXs[Random.Range(0, lapVFXs.Length)].Play();
+            if (lapVFXs.Length > 0) lapVFXs[Random.Range(0, lapVFXs.Length)].Play();        // ランダムエフェクトを再生
         }
 
         if (_lapsCompleted == totalLaps) GameManager.Instance.TriggerWin();

@@ -1,6 +1,10 @@
 using TMPro;
 using UnityEngine;
 
+
+/// <summary>
+/// ゲーム内UIを管理し、テキスト更新やUIの表示／非表示を行うクラス
+/// </summary>
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }

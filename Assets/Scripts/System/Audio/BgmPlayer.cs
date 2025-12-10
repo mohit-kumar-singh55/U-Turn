@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// シーンをまたいでBGMを再生するために使用
+/// </summary>
 public class BgmPlayer : MonoBehaviour
 {
     public static BgmPlayer Instance { get; private set; }
